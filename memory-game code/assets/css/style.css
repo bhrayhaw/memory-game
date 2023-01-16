@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@400;500;600&family=Raleway:ital,wght@1,900&family=Roboto&family=Space+Mono&display=swap');
+
+/* VARIABLES */
+:root{
+/* colors*/
+--background-color: #152938;
+--card-color: #ffffff;
+--button-empty: #304859;
+--button-color: #7191A5;
+--button-color-hover: #6395B8;
+--start-game: #FDA214;
+--start-game-hover: #FDBA4B;
+--button-color1: #DFE7EC;
+
+/* font */
+--main-font: 'Atkinson Hyperlegible', sans-serif;
+}
+
+/* GENERAL STYLES */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--background-color);
+    font-family: var(--main-font);
+    font-size: 16px;
+    color: var(--card-color);
+}
+
+.title{
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+/* GAME STYLES */
+.container{
+    margin: 1.5rem auto;
+    width: 90%;
+    background-color: var(--card-color);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.sub__title{
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 1rem 0;
+    color: var(--button-color)
+}
+
+.type__button{
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+.button{
+    text-align: center;
+    width: 8rem;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--card-color);
+    text-decoration: none;
+    background-color: var(--button-color1);
+}
+
+.button:hover{
+    background-color: var(--button-color-hover);
+}
+
+.button:active{
+    background-color: var(--button-empty);
+}
+
+.number_players{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+}
+.button_players{
+    width: 4rem;
+    height: 2.5rem;
+    border-radius: 2rem;
+    background-color: var(--button-color1);
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--card-color);
+    padding-top: 10px;
+}
+
+.button_players:hover{
+    background-color: var(--button-color-hover);
+}
+
+.active{
+    background-color: var(--button-empty);
+    cursor: default;
+    pointer-events: none;
+}
+
+.grid{
+    display: flex;
+    justify-content: space-around;
+}
+
+.button_start{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+    height: 3rem;
+    border-radius: 2rem;
+    background-color: var(--start-game);
+    text-decoration: none;
+    color: var(--card-color);
+    font-weight: 700;
+}
+
+.button_start:hover{
+    background-color: var(--start-game-hover);
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    width: 20%;
+    height: 20%;
+    border: 1px solid black;
+}
+
+
+
