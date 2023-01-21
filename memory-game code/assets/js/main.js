@@ -1,64 +1,47 @@
-const buttons_theme = document.querySelectorAll('.button_theme');
-const buttons_grid = document.querySelectorAll('.button_grid');
-const button_players = document.querySelectorAll('.button_players');
-
-buttons_theme.forEach(function(button) {
-    button.addEventListener("click", function() {
-    buttons_theme.forEach(function(button) {
-        button.classList.remove('active');
-    });
-        this.classList.add('active');
-    });
-});
-buttons_grid.forEach(function(button) {
-    button.addEventListener("click", function() {
-    buttons_grid.forEach(function(button) {
-        button.classList.remove('active');
-    });
-        this.classList.add('active');
+// Get all the buttons with the class "selectable-btn"
+const selectableButtons = document.querySelectorAll(
+    ".selectable-btn:not(.not-selectable)"
+);
+selectableButtons.forEach((btn) => {
+    btn.addEventListener("click", function () {
+        const group = this.dataset.group;
+        document
+            .querySelectorAll(`[data-group=${group}]:not(.not-selectable)`)
+            .forEach((b) => b.classList.remove("selected"));
+        this.classList.add("selected");
     });
 });
 
-button_players.forEach(function(player) {
-    player.addEventListener("click", function() {
-    button_players.forEach(function(player) {
-        player.classList.remove('active');
-    });
-        this.classList.add('active');
-    });
-});
+const startButton = document.querySelector(".btn-start");
+startButton.addEventListener(
+    "click",
+    function () {
+        // Get the selected theme, number of players, and grid size
+        const selectedTheme = document.querySelector(
+            ".btn-numbers.selected"
+        ).textContent;
+        const selectedPlayers = document.querySelector(
+            ".btn-number.selected"
+        ).textContent;
+        const selectedGrid =
+            document.querySelector(".btn-grid.selected").textContent;
 
-//Game board
-const boardContainer = document.getElementById("board-container");
-let rows = 4;
-let columns = 4;
-
-document.getElementById("grid-size-4x4").addEventListener("click", function(){
-    rows = 4;
-    columns = 4;
-});
-document.getElementById("grid-size-6x6").addEventListener("click", function(){
-    rows = 6;
-    columns = 6;
-});
-
-document.getElementById("start-button").addEventListener("click", createGameBoard);
-
-function createGameBoard() {
-    boardContainer.innerHTML = "";
-    for (let i = 0; i < rows; i++) {
-        let row = document.createElement("div");
-        row.classList.add("row");
-        for (let j = 0; j < columns; j++) {
-            let cell = document.createElement("div");
-            cell.classList.add("cell");
-            row.appendChild(cell);
+        // Check if the selected theme is "Numbers" and the selected grid size is "4x4"
+        if (
+            selectedTheme === "Numbers" &&
+            selectedGrid === "4x4" &&
+            selectedPlayers === "1"
+        ) {
+            // Create a 4x4 grid with the selected number of players
+            window.location.href = "fourbyfour.html";
         }
-        boardContainer.appendChild(row);
-    }
-}
-
-
-
-
-
+        // Check if the selected theme is "Numbers" and the selected grid size is "6x6"
+        if (
+            selectedTheme === "Numbers" &&
+            selectedGrid === "6x6" &&
+            selectedPlayers === "1"
+        ) {
+             // Create a 4x4 grid with the selected number of players
+            window.location.href = "sixbysix.html";
+        }
+    });
