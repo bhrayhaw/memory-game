@@ -192,7 +192,12 @@
     document.getElementById("score").innerHTML = score;
     document.getElementById("moves").innerHTML = moves;
     // Create an array of numbers to be used for the grid
-    let numbers = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8,];
+    let emojis = ["🚕", "🚗", "🚙", "🚌", "🛵", "🛴", "🛹", "🚲"];
+    let numbers = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
+
+    for(let i = 0; i < numbers.length; i++) {
+        numbers[i] = emojis[numbers[i]-1];
+    }
 
     // Shuffle the numbers so they appear in random order in the grid
     shuffle(numbers);

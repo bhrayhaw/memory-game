@@ -1,45 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
   <link rel="stylesheet" href="./assets/css/style.css">
-</head>
+  <style>
 
+
+  </style>
+</head>
 <body>
 
-  <div class="container">
-    <div class="row theme-row">
-      <h3>Select Theme</h3>
-      <div class="button-group">
-        <button class="btn btn-numbers selectable-btn" data-group="theme">Numbers</button>
-        <button class="btn btn-icons selectable-btn" data-group="theme">Icons</button>
-      </div>
-    </div>
-    <div class="row numbers-row">
-      <h3>Select Numbers</h3>
-      <div class="button-group">
-        <button class="btn btn-number selectable-btn" data-group="numbers">1</button>
-        <button class="btn btn-number selectable-btn" data-group="numbers">2</button>
-        <button class="btn btn-number selectable-btn" data-group="numbers">3</button>
-        <button class="btn btn-number selectable-btn" data-group="numbers">4</button>
-      </div>
-    </div>
-    <div class="row grid-row">
-      <h3>Grid Size</h3>
-      <div class="button-group">
-        <button class="btn btn-grid selectable-btn" data-group="grid">4x4</button>
-        <button class="btn btn-grid selectable-btn" data-group="grid">6x6</button>
-      </div>
-    </div>
-    <div class="row start-row">
-      <button class="btn btn-start not-selectable">Start Game</button>
+<div class="container">
+  <div class="row theme-row">
+    <h3>Select Theme</h3>
+    <div class="button-group">
+      <button class="btn btn-numbers selectable-btn" data-group="theme">Numbers</button>
+      <button class="btn btn-icons selectable-btn"  data-group="theme">Icons</button>
     </div>
   </div>
+  <div class="row numbers-row">
+    <h3>Select Numbers</h3>
+    <div class="button-group">
+      <button class="btn btn-number selectable-btn" data-group="numbers">1</button>
+      <button class="btn btn-number selectable-btn" data-group="numbers">2</button>
+      <button class="btn btn-number selectable-btn" data-group="numbers">3</button>
+      <button class="btn btn-number selectable-btn" data-group="numbers">4</button>
+    </div>
+  </div>
+  <div class="row grid-row">
+    <h3>Grid Size</h3>
+    <div class="button-group">
+    <button class="btn btn-grid selectable-btn" data-group="grid">4x4</button>
+    <button class="btn btn-grid selectable-btn" data-group="grid">6x6</button>
+  </div>
+  </div>
+  <div class="row start-row">
+    <button class="btn btn-start not-selectable">Start Game</button>
+  </div>
+</div>
 
 
-  <script src="./assets/js/main.js"></script>
+<script>
+
+  // Get all the buttons with the class "selectable-btn"
+  const selectableButtons = document.querySelectorAll(".selectable-btn:not(.not-selectable)");
+  selectableButtons.forEach(btn => {
+    btn.addEventListener("click", function() {
+      const group = this.dataset.group;
+      document.querySelectorAll(`[data-group=${group}]:not(.not-selectable)`).forEach(b => b.classList.remove("selected"))
+      this.classList.add("selected")
+    })
+  })
+
+  const numberBtn = document.querySelector(".btn-numbers");
+  const iconBtn = document.querySelector(".btn-icons");
+
+  numberBtn.addEventListener("click", function() {
+    numberBtn.classList.add("selected");
+    iconBtn.classList.remove("selected");
+  });
+
+  iconBtn.addEventListener("click", function() {
+    iconBtn.classList.add("selected");
+    numberBtn.classList.remove("selected");
+  });
+
+  const startButton = document.querySelector(".btn-start");
+  startButton.addEventListener("click", function() {
+
+    // Get the selected theme, number of players, and grid size
+    const selectedTheme = document.querySelector(".selected").textContent;
+    const selectedPlayers = document.querySelector(".btn-number.selected").textContent;
+    const selectedGrid = document.querySelector(".btn-grid.selected").textContent;
+
+    console.log(selectedTheme)
+
+    // Check if the selected theme is "Numbers" and the selected grid size is "4x4"
+    if (selectedTheme === "Numbers" && selectedGrid === "4x4" && selectedPlayers === "1") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Clear any existing content in the grid container
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "fourbyfour.html";
+    }
+    if (selectedTheme === "Numbers" && selectedGrid === "4x4" && selectedPlayers === "2") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "fourbyfour2P.html";
+    }
+    if (selectedTheme === "Numbers" && selectedGrid === "4x4" && selectedPlayers === "3") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "fourbyfour3P.html";
+    }
+    if (selectedTheme === "Numbers" && selectedGrid === "4x4" && selectedPlayers === "4") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "fourbyfour4P.html";
+    }
+    if (selectedTheme === "Numbers" && selectedGrid === "6x6" && selectedPlayers === "1") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "sixbysix.html";
+    }
+    if (selectedTheme === "Numbers" && selectedGrid === "6x6" && selectedPlayers === "2") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "sixbysix2P.html";
+    }
+    if (selectedTheme === "Numbers" && selectedGrid === "6x6" && selectedPlayers === "3") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "sixbysix3P.html";
+    }
+    if (selectedTheme === "Numbers" && selectedGrid === "6x6" && selectedPlayers === "4") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "sixbysix4P.html";
+    }if (selectedTheme==="Icons"  && selectedGrid === "6x6" && selectedPlayers === "1") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "sixbysixIcons.html";
+    }
+    if (selectedTheme==="Icons"  && selectedGrid === "6x6" && selectedPlayers === "2") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "sixbysixIcons2P.html";
+    }if (selectedTheme==="Icons"  && selectedGrid === "6x6" && selectedPlayers === "3") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "sixbysixIcons3P.html";
+    }if (selectedTheme==="Icons"  && selectedGrid === "6x6" && selectedPlayers === "4") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "sixbysixIcons4P.html";
+    }if (selectedTheme==="Icons"  && selectedGrid === "4x4" && selectedPlayers === "1") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "fourbyfourIcon.html";
+    }if (selectedTheme==="Icons"  && selectedGrid === "4x4" && selectedPlayers === "2") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "fourbyfour2PIcons.html";
+    }if (selectedTheme==="Icons"  && selectedGrid === "4x4" && selectedPlayers === "3") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "fourbyfour3PIcons.html";
+    }if (selectedTheme ==="Icons"  && selectedGrid === "4x4" && selectedPlayers === "4") {
+      // Get the grid container element
+      const gridContainer = document.querySelector(".grid-container");
+
+      // Create a 4x4 grid with the selected number of players
+      window.location.href = "fourbyfour4PIcons.html";
+    }
+  });
+
+
+</script>
 </body>
-
 </html>

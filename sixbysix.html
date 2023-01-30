@@ -186,7 +186,7 @@
         window.location.reload();
     })
     document.getElementById('new').addEventListener('click',()=>{
-        window.location.href = "./index.html";
+        window.location.href = "index.html";
     })
     window.addEventListener("load", startTimer);
     document.getElementById("score").innerHTML = score;
@@ -213,10 +213,17 @@
             if (!this.classList.contains("matched")) {
                 hiddenSpan.style.visibility = "visible";
                 if (previousClickedCell) {
+                    if (previousClickedCell.parentNode === this ) {
+                        previousClickedCell.style.visibility = "hidden";
+                        hiddenSpan.style.visibility = "hidden";
+                        previousClickedCell = null;
+                        return;
+                    }
+
                     if (previousClickedCell.innerHTML === hiddenSpan.innerHTML) {
                         this.classList.add("matched");
                         previousClickedCell.parentNode.classList.add("matched");
-                        previousClickedCell=null;
+                        previousClickedCell = null;
                         score += 1;
                         moves += 1;
                         document.getElementById("score").innerHTML = score;
@@ -242,7 +249,6 @@
                     let minutes = Math.floor(elapsedTime / 60000);
                     let seconds = Math.floor((elapsedTime % 60000) / 1000);
                     document.getElementById("timed").innerHTML = `${minutes}:${seconds}`;
-
                 }
             }
         });

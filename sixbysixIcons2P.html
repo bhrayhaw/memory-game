@@ -7,7 +7,7 @@
     <style>
         #grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             grid-gap: 10px;
 
         }
@@ -39,14 +39,14 @@
         }
 
         .cell {
-            width: 100px;
-            height: 100px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             border: none;
             justify-content: center;
             align-items: center;
-            font-size: 50px;
+            font-size: 30px;
             color: #DFE7EC;
             font-weight: bold;
             background-color: rgb(21, 41, 56);
@@ -93,7 +93,18 @@
             border-radius: 10px;
             margin-top: 20px;
 
+
         }
+        .modalBox span:first-of-type {
+            white-space: nowrap;
+        }
+        #p1 {
+            display: inline-block;
+        }
+        #p2 {
+            display: inline-block;
+        }
+
         #timeBox {
             width: 180px;
             height: 50px;
@@ -124,6 +135,41 @@
             background-color: rgb(0,0,0);
             background-color: rgba(0,0,0,0.4);
         }
+        .player1 {
+            width: 120px;
+            height: 57px;
+            border-radius: 15px;
+
+        }
+        .player2 {
+            width: 120px;
+            height: 80px;
+            border-radius: 15px;
+
+        }
+        #won1{
+            color: forestgreen;
+            font-weight: bolder;
+        } #won2{
+              color: #8b2225;
+              font-weight: bolder;
+          }
+        .player1, .player2 {
+            display: inline-block;
+            margin: 15px;
+            padding: 10px;
+        }
+        .player1, .player2 {
+            float: left;
+        }
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .active{
+            background-color: #FDA214
+        }
     </style>
 </head>
 <body>
@@ -131,24 +177,31 @@
     <div id="gridContainer">
 
         <div id="grid"></div>
-        <div id="timeBox" class="scoreMoves" >
-            <h3>Time:  <span id="timer">0:00</span></h3>
-        </div>
-        <div id="movesBox" class="scoreMoves">
-            <h3>Moves: <span id="moves"> 0</span></h3>
-        </div>
+<!--        <div id="timeBox" class="scoreMoves" >-->
+<!--           <h3>Time:  <span id="timer">0:00</span></h3>-->
+<!--        </div>-->
 
+        <div class="clearfix" style="display:flex; align-items: center">
+            <div class="player1" id="playerOneIndicator"> <h3>Player One  <span id="playerOneScore" style="margin-left: 5px;"></span></h3></div>
+            <div class="player1" id="playerTwoIndicator"> <h3>Player Two  <span id="playerTwoScore" style="margin-left: 5px;"></span></h3></div>
+        </div>
     </div>
+    </div>
+
     <h3 style="visibility: hidden">Score: <span id="score"> 0</span></h3>
     <div id="myModal">
         <div class="showModal">
-            <h1>You did it</h1>
-            <P>Game over! Here's how you got on...</P>
+           <h1>Score Board</h1>
             <div class="modalBox">
-                <h3 style="float: left;">Moves: <span style="margin-left: 300px" id="moved"> 0</span></h3>
+                <h3>Player One:   <span id="p1"> 0 </span> <span style="margin-left: 180px;" id="won1"></span></h3>
             </div>
+
+            <div class="modalBox">
+                <h3>Player Two:   <span id="p2"> 0 </span> <span style="margin-left: 180px;" id="won2"></span></h3>
+            </div>
+
             <div class="modalBox" >
-                <h3 style="float: left;">Time:  <span style="margin-left: 300px" id="timed">0:00</span></h3>
+                <h3>Time:  <span style="margin-left: 220px" id="timed">0:00</span></h3>
             </div>
             <div class="row grid-row">
                 <h3></h3>
@@ -161,9 +214,12 @@
     </div>
 </div>
 
-
 <script>
+
     // Get the grid element
+    const playerOneIndicator = document.getElementById("playerOneIndicator");
+    const playerTwoIndicator = document.getElementById("playerTwoIndicator");
+    playerOneIndicator.classList.add("active");
     let grid = document.getElementById("grid");
     let score = 0;
     let moves = 0;
@@ -175,9 +231,8 @@
             let minutes = Math.floor(elapsedTime / 60000);
             let seconds = Math.floor((elapsedTime % 60000) / 1000);
             let timerDisplay = `${minutes}:${seconds}`;
-
             // update the timer element in the HTML
-            document.getElementById("timer").innerHTML = timerDisplay;
+           // document.getElementById("timer").innerHTML = timerDisplay;
 
         }, 1000);
     }
@@ -189,57 +244,80 @@
         window.location.href = "index.html";
     })
     window.addEventListener("load", startTimer);
-    document.getElementById("score").innerHTML = score;
-    document.getElementById("moves").innerHTML = moves;
+    // document.getElementById("score").innerHTML = score;
+    // document.getElementById("moves").innerHTML = moves;
     // Create an array of numbers to be used for the grid
-    let numbers = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8,];
+    let emojis = ["🚕", "🚗", "🚌", "🛵", "🛴", "🚲", "🛹", "🛼", "🚀", "🛸", "🚁", "🛶", "🚂", "🚆", "🚊", "🚉", "🚞", "🚄", "🚅", "🚈"];
+    let numbers = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18];
+    let emojisNumbers = numbers.map(num => emojis[num - 1]);
+    // console.log(emojisNumbers);
 
     // Shuffle the numbers so they appear in random order in the grid
-    shuffle(numbers);
+    shuffle(emojisNumbers);
 
     // Create the grid using a for loop
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 36; i++) {
         let cell = document.createElement("div");
         cell.classList.add("cell");
-        cell.innerHTML = "<span class='hidden'>" + numbers[i] + "</span>";
+        cell.innerHTML = "<span class='hidden'>" + emojisNumbers[i] + "</span>";
         grid.appendChild(cell);
     }
     //Add event listener for each cell
     let cells = document.getElementsByClassName("cell");
     let previousClickedCell;
+    let playerOneScore = 0;
+    let playerTwoScore = 0;
+    let currentPlayer = "playerOne";
+
     for (let i = 0; i < cells.length; i++) {
         cells[i].addEventListener("click", function() {
             let hiddenSpan = this.getElementsByClassName("hidden")[0];
             if (!this.classList.contains("matched")) {
                 hiddenSpan.style.visibility = "visible";
                 if (previousClickedCell) {
-                    if (previousClickedCell.parentNode === this ) {
-                        previousClickedCell.style.visibility = "hidden";
-                        hiddenSpan.style.visibility = "hidden";
-                        previousClickedCell = null;
-                        return;
-                    }
                     if (previousClickedCell.innerHTML === hiddenSpan.innerHTML) {
                         this.classList.add("matched");
                         previousClickedCell.parentNode.classList.add("matched");
-                        previousClickedCell=null;
-                        score += 1;
-                        moves += 1;
-                        document.getElementById("score").innerHTML = score;
-                        document.getElementById("moves").innerHTML = moves;
-                        document.getElementById("moved").innerHTML = moves;
+                        previousClickedCell = null;
+                        if (currentPlayer === "playerOne") {
+                            playerOneIndicator.classList.add("active");
+                            playerTwoIndicator.classList.remove("active");
+                            playerOneScore += 1;
+                        } else {
+                            playerTwoIndicator.classList.add("active");
+                            playerOneIndicator.classList.remove("active");
+                            playerTwoScore += 1;
+                        }
+                        //If the player has made a match, no need to change the current player
                     } else {
                         setTimeout(function() {
                             previousClickedCell.style.visibility = "hidden";
                             hiddenSpan.style.visibility = "hidden";
                             previousClickedCell = null;
                             moves += 1;
-                            document.getElementById("moves").innerHTML = moves;
+                           // document.getElementById("moves").innerHTML = moves;
                         }, 300);
+                        //If the player has not made a match, change the current player
+                        currentPlayer = currentPlayer === "playerOne" ? "playerTwo" : "playerOne";
+                        if (currentPlayer === "playerOne") {
+                            playerOneIndicator.classList.add("active");
+                            playerTwoIndicator.classList.remove("active");
+
+                        } else {
+                            playerTwoIndicator.classList.add("active");
+                            playerOneIndicator.classList.remove("active");
+
+                        }
                     }
+                    moves += 1;
+                    document.getElementById("playerOneScore").innerHTML = playerOneScore;
+                    document.getElementById("playerTwoScore").innerHTML = playerTwoScore;
+
+                    console.log(currentPlayer)
                 } else {
                     previousClickedCell = hiddenSpan;
                 }
+
                 let clickableCells = document.getElementsByClassName("cell").length - document.getElementsByClassName("matched").length;
                 if (clickableCells === 0) {
                     document.getElementById('myModal').style.visibility='visible'
@@ -248,8 +326,23 @@
                     let minutes = Math.floor(elapsedTime / 60000);
                     let seconds = Math.floor((elapsedTime % 60000) / 1000);
                     document.getElementById("timed").innerHTML = `${minutes}:${seconds}`;
-
+                    document.getElementById("p1").innerHTML = playerOneScore;
+                    document.getElementById("p2").innerHTML = playerTwoScore;
+                    if (playerOneScore > playerTwoScore) {
+                        document.getElementById("won1").innerHTML = "Won";
+                        document.getElementById("won2").innerHTML = "Try Hard";
+                    } else if (playerTwoScore > playerOneScore) {
+                        document.getElementById("won2").innerHTML = "Won";
+                            document.getElementById("won1").innerHTML = "Tr Hard";
+                    }else if(playerTwoScore === playerOneScore){
+                        document.getElementById("won1").innerHTML = "Tie";
+                        document.getElementById("won2").innerHTML = "Tie";
+                    } else {
+                        document.getElementById("won1").innerHTML = "";
+                        document.getElementById("won2").innerHTML = "";
+                    }
                 }
+
             }
         });
     }

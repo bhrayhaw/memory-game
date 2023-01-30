@@ -7,7 +7,7 @@
     <style>
         #grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             grid-gap: 10px;
 
         }
@@ -39,14 +39,14 @@
         }
 
         .cell {
-            width: 100px;
-            height: 100px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             border: none;
             justify-content: center;
             align-items: center;
-            font-size: 50px;
+            font-size: 30px;
             color: #DFE7EC;
             font-weight: bold;
             background-color: rgb(21, 41, 56);
@@ -73,7 +73,7 @@
         }
 
         #movesBox {
-            width: 180px;
+            width: 200px;
             height: 50px;
             background-color: #f2f2f2;
             border: 1px solid #ccc;
@@ -95,7 +95,7 @@
 
         }
         #timeBox {
-            width: 180px;
+            width: 200px;
             height: 50px;
             background-color: #f2f2f2;
             border: 1px solid #ccc;
@@ -132,7 +132,7 @@
 
         <div id="grid"></div>
         <div id="timeBox" class="scoreMoves" >
-            <h3>Time:  <span id="timer">0:00</span></h3>
+           <h3>Time:  <span id="timer">0:00</span></h3>
         </div>
         <div id="movesBox" class="scoreMoves">
             <h3>Moves: <span id="moves"> 0</span></h3>
@@ -142,8 +142,8 @@
     <h3 style="visibility: hidden">Score: <span id="score"> 0</span></h3>
     <div id="myModal">
         <div class="showModal">
-            <h1>You did it</h1>
-            <P>Game over! Here's how you got on...</P>
+           <h1>You did it</h1>
+          <P>Game over! Here's how you got on...</P>
             <div class="modalBox">
                 <h3 style="float: left;">Moves: <span style="margin-left: 300px" id="moved"> 0</span></h3>
             </div>
@@ -192,16 +192,19 @@
     document.getElementById("score").innerHTML = score;
     document.getElementById("moves").innerHTML = moves;
     // Create an array of numbers to be used for the grid
-    let numbers = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8,];
+    let emojis = ["🚕", "🚗", "🚌", "🛵", "🛴", "🚲", "🛹", "🛼", "🚀", "🛸", "🚁", "🛶", "🚂", "🚆", "🚊", "🚉", "🚞", "🚄", "🚅", "🚈"];
+    let numbers = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18];
+    let emojisNumbers = numbers.map(num => emojis[num - 1]);
+   // console.log(emojisNumbers);
 
     // Shuffle the numbers so they appear in random order in the grid
-    shuffle(numbers);
+    shuffle(emojisNumbers);
 
     // Create the grid using a for loop
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 36; i++) {
         let cell = document.createElement("div");
         cell.classList.add("cell");
-        cell.innerHTML = "<span class='hidden'>" + numbers[i] + "</span>";
+        cell.innerHTML = "<span class='hidden'>" + emojisNumbers[i] + "</span>";
         grid.appendChild(cell);
     }
     //Add event listener for each cell
